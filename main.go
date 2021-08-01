@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
+
+	"github.com/sunderee/password-service/server"
+)
 
 func main() {
-	fmt.Println("Hello world!")
+	http.HandleFunc("/generate", server.ServerHandler)
+	err := http.ListenAndServe(":3333", nil)
+	if err != nil {
+		panic(err)
+	}
 }
